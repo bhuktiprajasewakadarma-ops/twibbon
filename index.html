@@ -59,6 +59,7 @@ document.getElementById("cap").value=CFG.caption;
 function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath()}
 function draw(){
   var c=cx;
+  document.getElementById("res").style.display="none";cv.style.display="block";
   c.clearRect(0,0,W,H);
   if(ready)c.drawImage(bg,0,0,W,H);else{c.fillStyle="#f97316";c.fillRect(0,0,W,H)}
   c.save();c.shadowColor="rgba(80,30,0,.45)";c.shadowBlur=28;c.shadowOffsetY=8;
@@ -112,8 +113,9 @@ dl.onclick=function(){
       try{await d.save({filename:"twibbon-seterima.png",data:blob});document.getElementById("hint").textContent="Tersimpan. Selamat membagikan!";return}
       catch(e){if(e&&e.code==="declined")return}
     }
+    try{var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="twibbon-seterima.png";document.body.appendChild(a);a.click();a.remove()}catch(e){}
     var r=document.getElementById("res");r.src=cv.toDataURL("image/png");r.style.display="block";cv.style.display="none";
-    document.getElementById("hint").textContent="Tekan lama (atau klik kanan) gambar di atas untuk menyimpan.";
+    document.getElementById("hint").textContent="Jika file belum terunduh, tekan lama (HP) atau klik kanan (komputer) pada gambar untuk menyimpan. Ubah zoom atau nama untuk mengedit lagi.";
   },"image/png");
 };
 </script>
